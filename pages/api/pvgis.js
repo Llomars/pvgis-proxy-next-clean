@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-// pages/api/pvgis.js
-import axios from 'axios';
-
-export default async function handler(req, res) {
-  const { lat, lon, puissance = 3, angle = 30, azimut = 0 } = req.query;
-  if (!lat || !lon) {
-    return res.status(400).json({ error: 'Missing lat/lon parameter' });
-  }
-  const url = `https://re.jrc.ec.europa.eu/api/v5_2/PVcalc?lat=${lat}&lon=${lon}&peakpower=${puissance}&angle=${angle}&aspect=${azimut}`;
-  try {
-    const response = await axios.get(url, { timeout: 15000 });
-    res.status(200).json(response.data);
-  } catch (e) {
-    res.status(500).json({ error: e.message, status: e.response?.status });
-  }
-}
-=======
 // Simple PVGIS proxy for Next.js API route (pages/api/pvgis.js)
 // Usage: /api/pvgis?url=<PVGIS_API_URL>
 
@@ -72,4 +54,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Proxy error', details: e.message, stack: e.stack, full: e });
   }
 }
->>>>>>> 1b7215a (feat: proxy PVGIS Next.js prêt pour Vercel)
